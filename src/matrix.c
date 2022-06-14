@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "matrix.h"
@@ -67,6 +68,28 @@ matrix_get(Matrix m, size_t i, size_t j, double *value) {
     return -1;
 
   *value = m->values[MAT_INDEX(m->n_cols, i, j)];
+
+  return 0;
+}
+
+int
+matrix_printf(Matrix m) {
+
+  if (!m)
+    return -1;
+
+  size_t num_rows = m->n_rows;
+  size_t num_cols = m->n_cols;
+  double value;
+
+  for (size_t i = 1; i <= num_rows; i++) {
+    for (size_t j = 1; j <= num_cols; j++) {
+      if (matrix_get(m, i, j, &value) < 0)
+        return -1;
+      printf("%10.5f", value);
+    }
+    printf("\n");
+  }
 
   return 0;
 }
