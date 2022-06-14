@@ -4,9 +4,9 @@
 #include <stddef.h>
 
 struct _Matrix {
-  size_t  n_rows;
-  size_t  n_cols;
-  double *values;
+  size_t n_rows;
+  size_t n_cols;
+  double values[];
 };
 
 typedef struct _Matrix *Matrix;

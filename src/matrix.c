@@ -11,12 +11,9 @@ matrix_new(size_t n_rows, size_t n_cols) {
     return NULL;
 
   Matrix m;
-  m = malloc(sizeof *(m));
-
+  m         = malloc(sizeof(*m) + sizeof(double) * n_rows * n_cols);
   m->n_rows = n_rows;
   m->n_cols = n_cols;
-
-  m->values = malloc(sizeof(double) * n_rows * n_cols);
 
   return m;
 }
@@ -37,7 +34,6 @@ matrix_free(Matrix m) {
   if (!m)
     return -1;
 
-  free(m->values);
   free(m);
 
   return 0;
