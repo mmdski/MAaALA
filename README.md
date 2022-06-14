@@ -1,2 +1,3 @@
 # MAaALA
-Notes and problems from Matrix Analysis and Applied Linear Algebra (Meyer, 2000)
+
+Notes and problems from *Matrix Analysis and Applied Linear Algebra* (Meyer, 2000)
