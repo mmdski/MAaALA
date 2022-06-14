@@ -29,6 +29,35 @@ matrix_new_like(Matrix m) {
   return like_m;
 }
 
+Matrix
+matrix_zeros(size_t n_rows, size_t n_cols) {
+
+  Matrix m;
+  if ((m = matrix_new(n_rows, n_cols)) == NULL)
+    return NULL;
+
+  for (size_t i = 1; i <= n_rows; i++) {
+    for (size_t j = 1; j <= n_cols; j++) {
+      m->values[MAT_INDEX(n_cols, i, j)] = 0;
+    }
+  }
+
+  return m;
+}
+
+Matrix
+matrix_from(size_t n_rows, size_t n_cols, double *values) {
+
+  Matrix m = matrix_new(n_rows, n_cols);
+  for (size_t i = 1; i <= n_rows; i++) {
+    for (size_t j = 1; j <= n_cols; j++) {
+      m->values[MAT_INDEX(n_cols, i, j)] = values[MAT_INDEX(n_cols, i, j)];
+    }
+  }
+
+  return m;
+}
+
 int
 matrix_free(Matrix m) {
 
@@ -89,6 +118,39 @@ matrix_printf(Matrix m) {
       printf("%10.5f", value);
     }
     printf("\n");
+  }
+
+  return 0;
+}
+
+int
+matrix_fill(Matrix a, Matrix b, size_t i, size_t j) {
+
+  if (!a)
+    return -1;
+  if (!b)
+    return -1;
+
+  if (i == 0 || j == 0)
+    return -1;
+
+  size_t last_row = b->n_rows + i - 1;
+  size_t last_col = b->n_cols + j - 1;
+
+  if (last_row > a->n_rows)
+    return -1;
+
+  if (last_col > a->n_cols)
+    return -1;
+
+  size_t n_cols_b = b->n_rows;
+  size_t n_cols_a = a->n_cols;
+
+  for (size_t k = i, m = 1; k <= last_row; k++, m++) {
+    for (size_t l = j, n = 1; l <= last_col; l++, n++) {
+      a->values[MAT_INDEX(n_cols_a, k, l)] =
+          b->values[MAT_INDEX(n_cols_b, m, n)];
+    }
   }
 
   return 0;
