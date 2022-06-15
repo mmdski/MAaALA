@@ -236,3 +236,49 @@ matrix_row_exchange(Matrix m, size_t i1, size_t i2) {
 
   return 0;
 }
+
+int
+matrix_mat_mult(Matrix a, Matrix b, Matrix *res_ptr) {
+
+  if (!a)
+    return -1;
+
+  if (!b)
+    return -1;
+
+  size_t n_rows_a   = a->n_rows;
+  size_t n_cols_a   = a->n_cols;
+  size_t n_rows_b   = b->n_rows;
+  size_t n_cols_b   = b->n_cols;
+  size_t n_rows_res = n_rows_a;
+  size_t n_cols_res = n_cols_b;
+
+  if (n_cols_a != n_rows_b)
+    return -1;
+
+  Matrix res = *res_ptr;
+  if (!res) {
+    res = matrix_new(n_rows_res, n_cols_res);
+  } else {
+    if ((res->n_rows != n_rows_res) || (res->n_cols != n_cols_res))
+      return -1;
+  }
+
+  double  sum;
+  double *a_values   = a->values;
+  double *b_values   = b->values;
+  double *res_values = res->values;
+
+  for (size_t i = 1; i <= n_rows_a; i++) {
+    for (size_t j = 1; j <= n_cols_b; j++) {
+      sum = 0;
+      for (size_t k = 1; k <= n_cols_a; k++) {
+        sum += a_values[MAT_INDEX(n_cols_a, i, k)] *
+               b_values[MAT_INDEX(n_cols_b, k, j)];
+      }
+      res_values[MAT_INDEX(n_cols_res, i, j)] = sum;
+    }
+  }
+
+  return 0;
+}

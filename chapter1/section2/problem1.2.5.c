@@ -31,5 +31,11 @@ main(void) {
   puts("\nX:");
   matrix_printf(x);
 
+  puts("\nAX=");
+  if (matrix_mat_mult(a, x, &b) < 0)
+    return EXIT_FAILURE;
+
+  matrix_printf(b);
+
   return EXIT_SUCCESS;
 }

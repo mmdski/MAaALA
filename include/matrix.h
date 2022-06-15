@@ -34,4 +34,6 @@ extern int matrix_printf(Matrix m);
 extern int matrix_row_add_row(Matrix m, size_t i1, size_t i2, double c);
 extern int matrix_row_exchange(Matrix m, size_t i1, size_t i2);
 
+extern int matrix_mat_mult(Matrix a, Matrix b, Matrix *res_ptr);
+
 #endif
