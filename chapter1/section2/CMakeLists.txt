@@ -6,3 +6,6 @@ target_link_libraries(problem1.2.2 matrix)
 
 add_executable(problem1.2.3 problem1.2.3.c gauss.c)
 target_link_libraries(problem1.2.3 matrix)
+
+add_executable(problem1.2.4 problem1.2.4.c gauss.c)
+target_link_libraries(problem1.2.4 matrix)
