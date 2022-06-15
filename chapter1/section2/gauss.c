@@ -75,12 +75,13 @@ gauss_reduce(Matrix aug) {
       if (matrix_get(aug, i, j, &row_value) < 0)
         return -1;
 
+      // pivot column is already zero
+      if (row_value == 0)
+        continue;
+
       multiplier = -row_value / pivot_value;
 
       if (matrix_add_row(aug, i, pivot_row, multiplier) < 0)
-        return -1;
-
-      if (matrix_set(aug, i, j, 0) < 0)
         return -1;
     }
 
@@ -133,7 +134,7 @@ gauss_back_sub(Matrix g_reduced, Matrix *x_ptr) {
       if ((matrix_get(g_reduced, i, j, &t_value)) < 0)
         goto fail;
 
-      x_sum -= t_value * x_values[i - 1];
+      x_sum -= t_value * x_values[j - 1];
     }
 
     if ((matrix_get(g_reduced, i, i, &t_value)) < 0)
