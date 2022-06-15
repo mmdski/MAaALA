@@ -131,48 +131,54 @@ gauss_back_sub(Matrix g_reduced, Matrix *x_ptr) {
 
   size_t n_rows   = g_reduced->n_rows;
   size_t n_cols_g = g_reduced->n_cols;
+  size_t n_cols_b = n_cols_g - n_rows;
 
-  // the last column is b
-  size_t n_cols_a = n_cols_g - 1;
-
-  // a in the reduced matrix must be square
-  if (n_rows != n_cols_a)
+  if (n_cols_b == 0)
     return -1;
+
+  size_t n_cols_a = n_rows;
 
   Matrix x      = *x_ptr;
   bool   free_x = false;
   if (!x) {
-    x      = matrix_new(n_rows, 1);
+    x      = matrix_new(n_rows, n_cols_b);
     *x_ptr = x;
     free_x = true;
   } else {
-    if ((x->n_rows != n_rows) || (x->n_cols != 1))
+    if ((x->n_rows != n_rows) || (x->n_cols != n_cols_b))
       goto fail;
   }
 
-  double  c_value;
-  double  t_value;
-  double  x_sum;
-  double *x_values = x->values;
+  double c_value;
+  double t_value;
+  double x_sum;
+  double x_val;
 
-  for (size_t i = n_rows; i > 0; i--) {
-    if ((matrix_get(g_reduced, i, n_rows + 1, &c_value)) < 0)
-      goto fail;
+  for (size_t b_col = 1; b_col <= n_cols_b; b_col++) {
+    for (size_t i = n_rows; i > 0; i--) {
 
-    x_sum = c_value;
-
-    for (size_t j = i + 1; j <= n_cols_a; j++) {
-
-      if ((matrix_get(g_reduced, i, j, &t_value)) < 0)
+      if ((matrix_get(g_reduced, i, n_cols_a + b_col, &c_value)) < 0)
         goto fail;
 
-      x_sum -= t_value * x_values[j - 1];
+      x_sum = c_value;
+
+      for (size_t j = i + 1; j <= n_cols_a; j++) {
+
+        if ((matrix_get(g_reduced, i, j, &t_value)) < 0)
+          goto fail;
+
+        if (matrix_get(x, j, b_col, &x_val) < 0)
+          goto fail;
+
+        x_sum -= t_value * x_val;
+      }
+
+      if ((matrix_get(g_reduced, i, i, &t_value)) < 0)
+        goto fail;
+
+      if (matrix_set(x, i, b_col, x_sum / t_value) < 0)
+        goto fail;
     }
-
-    if ((matrix_get(g_reduced, i, i, &t_value)) < 0)
-      goto fail;
-
-    x_values[i - 1] = x_sum / t_value;
   }
 
   return 0;
