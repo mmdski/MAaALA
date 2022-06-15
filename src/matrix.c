@@ -194,7 +194,7 @@ matrix_fill(Matrix a, Matrix b, size_t i, size_t j) {
 }
 
 int
-matrix_add_row(Matrix m, size_t i1, size_t i2, double c) {
+matrix_row_add_row(Matrix m, size_t i1, size_t i2, double c) {
 
   if (!m)
     return -1;

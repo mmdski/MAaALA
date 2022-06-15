@@ -31,7 +31,7 @@ extern int matrix_printf(Matrix m);
 
 /* matrix row operations */
 
-extern int matrix_add_row(Matrix m, size_t i1, size_t i2, double c);
+extern int matrix_row_add_row(Matrix m, size_t i1, size_t i2, double c);
 extern int matrix_row_exchange(Matrix m, size_t i1, size_t i2);
 
 #endif

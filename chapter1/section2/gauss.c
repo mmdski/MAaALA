@@ -81,7 +81,7 @@ gauss_reduce(Matrix aug) {
 
       multiplier = -row_value / pivot_value;
 
-      if (matrix_add_row(aug, i, pivot_row, multiplier) < 0)
+      if (matrix_row_add_row(aug, i, pivot_row, multiplier) < 0)
         return -1;
     }
 
