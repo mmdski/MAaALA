@@ -9,9 +9,8 @@
 int
 main(void) {
 
-  // manually swap rows 2 and 1
-  double x_vals[] = {-1, 7, -5, 0, 4, -3, -1, 8, -6};
-  double b_vals[] = {4, 3, 5};
+  double x_vals[] = {0, 4, -3, -1, 7, -5, -1, 8, -6};
+  double b_vals[] = {3, 4, 5};
   size_t n_rows   = 3;
   size_t n_cols   = 3;
 

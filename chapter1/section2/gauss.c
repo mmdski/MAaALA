@@ -47,6 +47,35 @@ fail:
   return -1;
 }
 
+// swap zero-pivot rows
+static int
+exchange_zero_pivot(Matrix m, size_t pivot_row, size_t pivot_col) {
+
+  size_t n_rows = m->n_rows;
+  size_t i;
+  double value;
+
+  for (i = pivot_row; i <= n_rows; i++) {
+
+    if (matrix_get(m, i, pivot_col, &value) < 0)
+      return -1;
+
+    if (value != 0)
+      break;
+  }
+
+  if (i == pivot_row)
+    return 0;
+
+  if (value == 0)
+    return -1;
+
+  if (matrix_row_exchange(m, pivot_row, i) < 0)
+    return -1;
+  else
+    return 0;
+}
+
 int
 gauss_reduce(Matrix aug) {
 
@@ -65,17 +94,20 @@ gauss_reduce(Matrix aug) {
   size_t pivot_row = 1;
   size_t n_cols_a  = n_rows;
 
-  for (size_t j = 1; j <= n_cols_a; j++) {
+  for (size_t pivot_col = 1; pivot_col <= n_cols_a; pivot_col++) {
 
-    if (matrix_get(aug, pivot_row, j, &pivot_value) < 0)
+    if (exchange_zero_pivot(aug, pivot_row, pivot_col) < 0)
+      return -1;
+
+    if (matrix_get(aug, pivot_row, pivot_col, &pivot_value) < 0)
       return -1;
 
     for (size_t i = pivot_row + 1; i <= n_rows; i++) {
 
-      if (matrix_get(aug, i, j, &row_value) < 0)
+      if (matrix_get(aug, i, pivot_col, &row_value) < 0)
         return -1;
 
-      // pivot column is already zero
+      // row value in pivot column is already zero
       if (row_value == 0)
         continue;
 
