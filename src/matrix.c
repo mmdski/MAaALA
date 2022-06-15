@@ -30,6 +30,22 @@ matrix_new_like(Matrix m) {
 }
 
 Matrix
+matrix_ones(size_t n_rows, size_t n_cols) {
+
+  Matrix m;
+  if ((m = matrix_new(n_rows, n_cols)) == NULL)
+    return NULL;
+
+  for (size_t i = 1; i <= n_rows; i++) {
+    for (size_t j = 1; j <= n_cols; j++) {
+      m->values[MAT_INDEX(n_cols, i, j)] = 1;
+    }
+  }
+
+  return m;
+}
+
+Matrix
 matrix_zeros(size_t n_rows, size_t n_cols) {
 
   Matrix m;
@@ -143,11 +159,11 @@ matrix_fill(Matrix a, Matrix b, size_t i, size_t j) {
   if (last_col > a->n_cols)
     return -1;
 
-  size_t n_cols_b = b->n_rows;
+  size_t n_cols_b = b->n_cols;
   size_t n_cols_a = a->n_cols;
 
-  for (size_t k = i, m = 1; k <= last_row; k++, m++) {
-    for (size_t l = j, n = 1; l <= last_col; l++, n++) {
+  for (size_t l = j, n = 1; l <= last_col; l++, n++) {
+    for (size_t k = i, m = 1; k <= last_row; k++, m++) {
       a->values[MAT_INDEX(n_cols_a, k, l)] =
           b->values[MAT_INDEX(n_cols_b, m, n)];
     }
@@ -176,7 +192,7 @@ matrix_row_mult_const(Matrix m, size_t i, double c) {
 }
 
 int
-matrix_row_add_row(Matrix m, size_t i1, size_t i2, double c) {
+matrix_add_row(Matrix m, size_t i1, size_t i2, double c) {
 
   if (!m)
     return -1;
@@ -190,7 +206,7 @@ matrix_row_add_row(Matrix m, size_t i1, size_t i2, double c) {
 
   for (size_t j = 1; j <= n_cols; j++) {
     val = m->values[MAT_INDEX(n_cols, i2, j)];
-    m->values[MAT_INDEX(n_cols, i1, j)] *= c * val;
+    m->values[MAT_INDEX(n_cols, i1, j)] += c * val;
   }
 
   return 0;
