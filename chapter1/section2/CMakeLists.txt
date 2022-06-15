@@ -12,3 +12,9 @@ target_link_libraries(problem1.2.4 matrix)
 
 add_executable(problem1.2.5 problem1.2.5.c gauss.c)
 target_link_libraries(problem1.2.5 matrix)
+
+add_executable(problem1.2.8 problem1.2.8.c gauss.c)
+target_link_libraries(problem1.2.8 matrix)
+
+add_executable(problem1.2.9 problem1.2.9.c gauss.c)
+target_link_libraries(problem1.2.9 matrix)
