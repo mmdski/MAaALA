@@ -74,6 +74,27 @@ matrix_from(size_t n_rows, size_t n_cols, double *values) {
   return m;
 }
 
+Matrix
+matrix_eye(size_t size) {
+
+  if (size == 0)
+    return NULL;
+
+  Matrix  m      = matrix_new(size, size);
+  double *values = m->values;
+
+  for (size_t i = 1; i <= size; i++) {
+    for (size_t j = 1; j <= size; j++) {
+      if (i == j)
+        values[MAT_INDEX(size, i, j)] = 1;
+      else
+        values[MAT_INDEX(size, i, j)] = 0;
+    }
+  }
+
+  return m;
+}
+
 int
 matrix_free(Matrix m) {
 
@@ -173,25 +194,6 @@ matrix_fill(Matrix a, Matrix b, size_t i, size_t j) {
 }
 
 int
-matrix_row_mult_const(Matrix m, size_t i, double c) {
-
-  if (!m)
-    return -1;
-  if (i == 0 || i > m->n_rows)
-    return -1;
-
-  size_t n_cols = m->n_cols;
-  double val;
-
-  for (size_t j = 1; j <= n_cols; j++) {
-    val = m->values[MAT_INDEX(n_cols, i, j)];
-    m->values[MAT_INDEX(n_cols, i, j)] *= c * val;
-  }
-
-  return 0;
-}
-
-int
 matrix_add_row(Matrix m, size_t i1, size_t i2, double c) {
 
   if (!m)
@@ -207,6 +209,29 @@ matrix_add_row(Matrix m, size_t i1, size_t i2, double c) {
   for (size_t j = 1; j <= n_cols; j++) {
     val = m->values[MAT_INDEX(n_cols, i2, j)];
     m->values[MAT_INDEX(n_cols, i1, j)] += c * val;
+  }
+
+  return 0;
+}
+
+int
+matrix_row_exchange(Matrix m, size_t i1, size_t i2) {
+  if (!m)
+    return -1;
+  if (i1 == 0 || i1 > m->n_rows)
+    return -1;
+  if (i2 == 0 || i2 > m->n_rows)
+    return -1;
+
+  size_t n_cols = m->n_cols;
+
+  double  val1;
+  double *values = m->values;
+
+  for (size_t j = 1; j <= n_cols; j++) {
+    val1                             = values[MAT_INDEX(n_cols, i1, j)];
+    values[MAT_INDEX(n_cols, i1, j)] = values[MAT_INDEX(n_cols, i2, j)];
+    values[MAT_INDEX(n_cols, i2, j)] = val1;
   }
 
   return 0;
