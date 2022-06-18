@@ -53,7 +53,7 @@ exchange_zero_pivot(Matrix m, size_t pivot_row, size_t pivot_col) {
 
   size_t n_rows = m->n_rows;
   size_t i;
-  double value;
+  double value = 0;
 
   for (i = pivot_row; i <= n_rows; i++) {
 

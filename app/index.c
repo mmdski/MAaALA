@@ -11,7 +11,7 @@ main(void) {
 
   for (size_t i = 1; i <= m; i++) {
     for (size_t j = 1; j <= n; j++) {
-      printf("%4lu", INDEX(n, i, j));
+      printf("%4zu", INDEX(n, i, j));
     }
     printf("\n");
   }
