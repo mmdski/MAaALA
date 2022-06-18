@@ -9,5 +9,6 @@ main(void) {
   matrix_printf(eye);
   matrix_row_exchange(eye, 1, 2);
   matrix_printf(eye);
+  matrix_free(eye);
   return EXIT_SUCCESS;
 }

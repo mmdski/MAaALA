@@ -37,5 +37,9 @@ main(void) {
 
   matrix_printf(b);
 
+  matrix_free(a);
+  matrix_free(b);
+  matrix_free(x);
+
   return EXIT_SUCCESS;
 }

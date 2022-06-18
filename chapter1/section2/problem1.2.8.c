@@ -31,5 +31,9 @@ main(void) {
   puts("\nReduced augmented matrix:");
   matrix_printf(aug);
 
+  matrix_free(a);
+  matrix_free(b);
+  matrix_free(aug);
+
   return EXIT_SUCCESS;
 }

@@ -206,6 +206,8 @@ gauss_solve(Matrix a, Matrix b, Matrix *x_ptr) {
   if (gauss_back_sub(aug, x_ptr) < 0)
     goto fail;
 
+  matrix_free(aug);
+
   return 0;
 
 fail:
