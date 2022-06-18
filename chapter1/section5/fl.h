@@ -2,6 +2,10 @@
 
 static inline double
 fl(double value, unsigned int precision) {
+
+  if (value == 0)
+    return value;
+
   int    exp10    = ceil(log10(value));
   double sig10    = value / pow(10, exp10);
   double to_round = nextafter(sig10 * pow(10, precision), INFINITY);
