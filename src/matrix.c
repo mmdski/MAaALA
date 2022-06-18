@@ -152,7 +152,7 @@ matrix_printf(Matrix m) {
     for (size_t j = 1; j <= num_cols; j++) {
       if (matrix_get(m, i, j, &value) < 0)
         return -1;
-      printf("%10.5f", value);
+      printf("%10.5g", value);
     }
     printf("\n");
   }
