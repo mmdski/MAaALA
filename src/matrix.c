@@ -223,6 +223,10 @@ matrix_row_exchange(Matrix m, size_t i1, size_t i2) {
   if (i2 == 0 || i2 > m->n_rows)
     return -1;
 
+  // return without swapping if swapped rows are the same
+  if (i1 == i2)
+    return 0;
+
   size_t n_cols = m->n_cols;
 
   double  val1;
