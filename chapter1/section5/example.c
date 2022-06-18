@@ -13,18 +13,28 @@ print_frexp(double value) {
 
 void
 print_fl_steps(double a, double b, unsigned int precision) {
+
   double value = a / b;
 
   printf("a / b = %g / %g\n", a, b);
   printf("value = %g\n", value);
 
-  int exp10 = ceil(log10(value));
+  int    exp10;
+  double inf;
+  if (value > 0) {
+    exp10 = ceil(log10(value));
+    inf   = INFINITY;
+  } else if (value < 0) {
+    exp10 = ceil(log10(-value));
+    inf   = -INFINITY;
+  } else
+    return;
   printf("exp10 = %d\n", exp10);
 
   double sig10 = value / pow(10, exp10);
   printf("sig10 = %g\n", sig10);
 
-  double to_round = nextafter(sig10 * pow(10, precision), INFINITY);
+  double to_round = nextafter(sig10 * pow(10, precision), inf);
   printf("to round = %g\n", to_round);
 
   double rounded = round(to_round);
@@ -47,6 +57,8 @@ int
 main(void) {
 
   printf("fl(%g/%g) = fl(%g) = %g\n", 3., 80., 3. / 80., fl(3. / 80, 2));
+
+  printf("fl(%g/%g) = fl(%g) = %g\n", -3., 80., -3. / 80., fl(-3. / 80, 2));
 
   double       a         = 89;
   double       b         = 47;
