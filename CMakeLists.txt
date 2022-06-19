@@ -9,10 +9,17 @@ if(MSVC)
 
   add_compile_options(/guard:cf /analyze /permissive- /W4 /WX)
 
+  macro(link_math target)
+  endmacro()
+
 else()
 
   add_compile_options(-Wall -Wextra -pedantic -Werror -fsanitize=address)
   add_link_options(-fsanitize=address)
+
+  macro(link_math target)
+    target_link_libraries(${target} m)
+  endmacro()
 
 endif()
 
