@@ -7,10 +7,10 @@ fl(double value, unsigned int precision) {
   double inf;
 
   if (value > 0) {
-    exp10 = ceil(log10(value));
+    exp10 = (int) ceil(log10(value));
     inf   = INFINITY;
   } else if (value < 0) {
-    exp10 = ceil(log10(-value));
+    exp10 = (int) ceil(log10(-value));
     inf   = -INFINITY;
   } else {
     return value;

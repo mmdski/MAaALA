@@ -22,10 +22,10 @@ print_fl_steps(double a, double b, unsigned int precision) {
   int    exp10;
   double inf;
   if (value > 0) {
-    exp10 = ceil(log10(value));
+    exp10 = (int) ceil(log10(value));
     inf   = INFINITY;
   } else if (value < 0) {
-    exp10 = ceil(log10(-value));
+    exp10 = (int) ceil(log10(-value));
     inf   = -INFINITY;
   } else
     return;
@@ -41,7 +41,7 @@ print_fl_steps(double a, double b, unsigned int precision) {
   printf("rounded = %g\n", rounded);
 
   double fl = pow(10, exp10) * rounded / pow(10, precision);
-  printf("fl(value) = fl(%g) = %g, precision = %d\n", value, fl, precision);
+  printf("fl(value) = fl(%g) = %g, precision = %lu\n", value, fl, precision);
 }
 
 void

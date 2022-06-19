@@ -6,7 +6,7 @@
 struct _Matrix {
   size_t n_rows;
   size_t n_cols;
-  double values[];
+  double values[1];
 };
 
 typedef struct _Matrix *Matrix;
