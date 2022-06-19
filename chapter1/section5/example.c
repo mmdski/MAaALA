@@ -41,7 +41,7 @@ print_fl_steps(double a, double b, unsigned int precision) {
   printf("rounded = %g\n", rounded);
 
   double fl = pow(10, exp10) * rounded / pow(10, precision);
-  printf("fl(value) = fl(%g) = %g, precision = %lu\n", value, fl, precision);
+  printf("fl(value) = fl(%g) = %g, precision = %u\n", value, fl, precision);
 }
 
 void
