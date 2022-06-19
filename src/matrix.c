@@ -12,7 +12,7 @@ matrix_new(size_t n_rows, size_t n_cols) {
     return NULL;
 
   Matrix m;
-  if ((m = malloc(sizeof(*m) + sizeof(double) * n_rows * n_cols)) == NULL)
+  if ((m = malloc(sizeof(*m) + sizeof(double) * (n_rows * n_cols - 1))) == NULL)
     return NULL;
   m->n_rows = n_rows;
   m->n_cols = n_cols;
