@@ -5,8 +5,16 @@ project(ala)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
-add_compile_options(-Wall -Wextra -pedantic -Werror -fsanitize=address)
-add_link_options(-fsanitize=address)
+if(MSVC)
+
+  add_compile_options(/guard:cf /analyze /permissive- /W4 /WX)
+
+else()
+
+  add_compile_options(-Wall -Wextra -pedantic -Werror -fsanitize=address)
+  add_link_options(-fsanitize=address)
+
+endif()
 
 include_directories(include)
 
