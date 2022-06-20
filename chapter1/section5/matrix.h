@@ -1,6 +1,8 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
 
+#define MAT_INDEX(n_cols, row, col) (row - 1) * n_cols + (col - 1)
+
 #include <stddef.h>
 
 struct _Matrix {
@@ -34,6 +36,8 @@ extern int matrix_printf(Matrix m);
 extern int matrix_row_add_row(
     Matrix m, size_t i1, size_t i2, double c, unsigned int precision);
 extern int matrix_row_exchange(Matrix m, size_t i1, size_t i2);
+extern int
+matrix_row_mult(Matrix m, size_t i, double c, unsigned int precision);
 
 extern int
 matrix_mat_mult(Matrix a, Matrix b, Matrix *res_ptr, unsigned int precision);

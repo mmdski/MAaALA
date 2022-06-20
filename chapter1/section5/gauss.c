@@ -79,6 +79,42 @@ exchange_pivot(Matrix m, size_t pivot_row, size_t pivot_col) {
 }
 
 int
+gauss_row_scale(Matrix aug, unsigned int precision) {
+
+  if (!aug)
+    return -1;
+
+  size_t n_rows   = aug->n_rows;
+  size_t n_cols   = aug->n_cols;
+  size_t n_cols_a = n_rows;
+
+  if (n_cols <= n_cols_a)
+    return -1;
+
+  double  row_value;
+  double  max_row_value;
+  double *values = aug->values;
+
+  for (size_t i = 1; i <= n_rows; i++) {
+
+    max_row_value = fabs(values[MAT_INDEX(n_cols, i, 1)]);
+
+    for (size_t j = 2; j <= n_cols_a; j++) {
+
+      row_value = values[MAT_INDEX(n_cols, i, j)];
+
+      if (fabs(row_value) > max_row_value)
+        max_row_value = row_value;
+    }
+
+    if (matrix_row_mult(aug, i, 1. / max_row_value, precision) < 0)
+      return -1;
+  }
+
+  return 0;
+}
+
+int
 gauss_reduce(Matrix aug, unsigned int precision, bool partial_pivot) {
 
   if (!aug)

@@ -4,8 +4,6 @@
 #include "fl.h"
 #include "matrix.h"
 
-#define MAT_INDEX(n_cols, row, col) (row - 1) * n_cols + (col - 1)
-
 Matrix
 matrix_new(size_t n_rows, size_t n_cols) {
 
@@ -207,8 +205,7 @@ matrix_row_add_row(
   if (i2 == 0 || i2 > m->n_rows)
     return -1;
 
-  size_t n_cols = m->n_cols;
-  // double  fl_c   = fl(c, precision);
+  size_t  n_cols = m->n_cols;
   double  val;
   double *values = m->values;
 
@@ -246,6 +243,26 @@ matrix_row_exchange(Matrix m, size_t i1, size_t i2) {
     val1                             = values[MAT_INDEX(n_cols, i1, j)];
     values[MAT_INDEX(n_cols, i1, j)] = values[MAT_INDEX(n_cols, i2, j)];
     values[MAT_INDEX(n_cols, i2, j)] = val1;
+  }
+
+  return 0;
+}
+
+int
+matrix_row_mult(Matrix m, size_t i, double c, unsigned int precision) {
+
+  if (!m)
+    return -1;
+
+  if (i == 0 || i > m->n_rows)
+    return -1;
+
+  size_t  n_cols = m->n_cols;
+  double *values = m->values;
+
+  for (size_t j = 1; j <= n_cols; j++) {
+    values[MAT_INDEX(n_cols, i, j)] =
+        fl(c * values[MAT_INDEX(n_cols, i, j)], precision);
   }
 
   return 0;

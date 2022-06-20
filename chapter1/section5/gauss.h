@@ -11,3 +11,4 @@ extern int gauss_solve(Matrix       a,
                        Matrix      *x_ptr,
                        unsigned int precision,
                        bool         partial_pivot);
+extern int gauss_row_scale(Matrix aug, unsigned int precision);
