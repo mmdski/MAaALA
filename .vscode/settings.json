@@ -2,5 +2,6 @@
   "cSpell.words": [
     "mathfrak",
     "pmatrix"
-  ]
+  ],
+  "clang-tidy.buildPath": "build"
 }
