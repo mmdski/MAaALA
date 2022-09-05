@@ -1,2 +1,8 @@
 add_spam_exe(problem3.5.1a)
 add_spam_exe(problem3.5.1d)
+add_spam_exe(problem3.5.1e)
+add_spam_exe(problem3.5.1g)
+add_spam_exe(problem3.5.1h)
+add_spam_exe(problem3.5.1i)
+add_spam_exe(problem3.5.1j)
+add_spam_exe(problem3.5.1k)
