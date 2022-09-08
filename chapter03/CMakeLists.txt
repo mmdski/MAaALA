@@ -1,3 +1,5 @@
+add_spam_exe(example3.7.3)
+
 add_spam_exe(problem3.5.1a)
 add_spam_exe(problem3.5.1d)
 add_spam_exe(problem3.5.1e)
