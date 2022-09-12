@@ -5,6 +5,7 @@
 
 extern SPAMatrix ala_new_from(double *values, size_t m, size_t n);
 extern SPAMatrix ala_eye(size_t m);
+extern SPAMatrix ala_copy(SPAMatrix a);
 extern SPAMatrix ala_mat_colcat(SPAMatrix a, SPAMatrix b);
 extern SPAMatrix ala_mat_rowcat(SPAMatrix a, SPAMatrix b);
 extern SPAMatrix

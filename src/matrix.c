@@ -24,6 +24,13 @@ ala_eye(size_t m) {
 }
 
 SPAMatrix
+ala_copy(SPAMatrix a) {
+  SPAMatrix b = NULL;
+  spa_mat_new_copy(&b, a);
+  return b;
+}
+
+SPAMatrix
 ala_mat_transpose(SPAMatrix a) {
   assert(a);
 
