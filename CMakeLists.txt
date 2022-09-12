@@ -16,9 +16,17 @@ FetchContent_MakeAvailable(spam)
 
 include_directories(${spam_SOURCE_DIR}/include)
 
+add_subdirectory(src)
+include_directories(include)
+
 macro(add_spam_exe basename)
   add_executable(${basename} ${basename}.c)
   target_link_libraries(${basename} spam m)
+endmacro()
+
+macro(add_ala_exe basename)
+  add_executable(${basename} ${basename}.c)
+  target_link_libraries(${basename} spam ala m)
 endmacro()
 
 add_subdirectory(chapter01)

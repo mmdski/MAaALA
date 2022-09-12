@@ -5,7 +5,8 @@
     "isclose",
     "mathbf",
     "mathfrak",
-    "pmatrix"
+    "pmatrix",
+    "rowcat"
   ],
   "clang-tidy.buildPath": "build"
 }
