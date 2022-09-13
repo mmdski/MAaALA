@@ -4,6 +4,14 @@
 #include <spam.h>
 
 SPAMatrix
+ala_new(size_t m, size_t n) {
+
+  SPAMatrix a = NULL;
+  spa_mat_new(&a, m, n);
+  return a;
+}
+
+SPAMatrix
 ala_new_like(SPAMatrix a) {
 
   SPAMatrix b = NULL;
