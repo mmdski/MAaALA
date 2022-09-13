@@ -3,6 +3,7 @@
 
 #include <spam.h>
 
+extern SPAMatrix ala_new_like(SPAMatrix a);
 extern SPAMatrix ala_new_from(double *values, size_t m, size_t n);
 extern SPAMatrix ala_eye(size_t m);
 extern SPAMatrix ala_copy(SPAMatrix a);
