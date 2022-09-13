@@ -1,6 +1,7 @@
 add_spam_exe(example3.7.3)
 add_ala_exe(example3.10.1)
 add_ala_exe(example3.10.2)
+add_ala_exe(example3.10.4)
 
 add_spam_exe(problem3.5.1a)
 add_spam_exe(problem3.5.1d)
