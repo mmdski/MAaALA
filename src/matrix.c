@@ -41,6 +41,13 @@ ala_eye(size_t m) {
 }
 
 SPAMatrix
+ala_zeros(size_t m, size_t n) {
+  SPAMatrix zeros = NULL;
+  spa_mat_new_zeros(&zeros, m, n);
+  return zeros;
+}
+
+SPAMatrix
 ala_copy(SPAMatrix a) {
   SPAMatrix b = NULL;
   spa_mat_new_copy(&b, a);
@@ -101,6 +108,16 @@ ala_mat_col_extract(SPAMatrix a, size_t n_cols, size_t *col_nos) {
   spa_mat_new(&cols, a_size.n_rows, n_cols);
   spa_mat_col_extract(cols, a, col_nos);
   return cols;
+}
+
+SPAMatrix
+ala_mat_row_extract(SPAMatrix a, size_t n_rows, size_t *row_nos) {
+
+  SPAMatrixSize a_size = spa_mat_size(a);
+  SPAMatrix     rows   = NULL;
+  spa_mat_new(&rows, n_rows, a_size.n_cols);
+  spa_mat_row_extract(rows, a, row_nos);
+  return rows;
 }
 
 SPAMatrix
