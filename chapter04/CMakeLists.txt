@@ -1,1 +1,6 @@
 add_ala_exe(problem4.2.1)
+add_ala_exe(problem4.3.1a)
+add_ala_exe(problem4.3.1b)
+add_ala_exe(problem4.3.1c)
+add_ala_exe(problem4.3.1d)
+add_ala_exe(problem4.3.1e)
