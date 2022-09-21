@@ -8,6 +8,7 @@
     "mathfrak",
     "pmatrix",
     "rowcat",
+    "soln",
     "solns"
   ],
   "clang-tidy.buildPath": "build"
