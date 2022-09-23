@@ -5,6 +5,7 @@
     "elim",
     "isclose",
     "mathbf",
+    "mathcal",
     "mathfrak",
     "pmatrix",
     "rowcat",
